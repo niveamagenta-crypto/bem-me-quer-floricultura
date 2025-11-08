@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="petalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D95B6C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C54456;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="48" fill="#F6EEE9"/>
+  
+  <!-- Flower Petals -->
+  <g transform="translate(50, 50)">
+    <!-- Petal 1 (top) -->
+    <ellipse cx="0" cy="-20" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(0)"/>
+    <!-- Petal 2 -->
+    <ellipse cx="0" cy="-20" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(72)"/>
+    <!-- Petal 3 -->
+    <ellipse cx="0" cy="-20" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(144)"/>
+    <!-- Petal 4 -->
+    <ellipse cx="0" cy="-20" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(216)"/>
+    <!-- Petal 5 -->
+    <ellipse cx="0" cy="-20" rx="12" ry="18" fill="url(#petalGradient)" transform="rotate(288)"/>
+    
+    <!-- Center -->
+    <circle cx="0" cy="0" r="8" fill="#D4A15A"/>
+    <circle cx="0" cy="0" r="5" fill="#24523A" opacity="0.3"/>
+  </g>
+</svg>
+
+

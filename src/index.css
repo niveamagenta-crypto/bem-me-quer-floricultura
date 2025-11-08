@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-gray-900 antialiased;
+    background-color: #F6EEE9;
+  }
+
+  * {
+    @apply scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent;
+  }
+}
+
+@layer utilities {
+  /* Animações customizadas */
+  .animate-slide-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-slide-up.animate-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+  }
+
+  .animate-fade-in.animate-visible {
+    opacity: 1;
+  }
+
+  /* Scrollbar customizado */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thumb-primary\/30::-webkit-scrollbar-thumb {
+    background-color: rgba(217, 91, 108, 0.3);
+    border-radius: 4px;
+  }
+
+  .scrollbar-thumb-primary\/30::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(217, 91, 108, 0.5);
+  }
+
+  .scrollbar-track-transparent::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  /* Textura de fundo sutil */
+  .texture-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  /* Sombras customizadas */
+  .shadow-elegant {
+    box-shadow: 0 10px 40px -10px rgba(217, 91, 108, 0.15);
+  }
+
+  /* Gradientes */
+  .gradient-primary {
+    background: linear-gradient(135deg, #D95B6C 0%, #C54456 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, #24523A 0%, #1A3D2B 100%);
+  }
+
+  /* Focus states acessíveis */
+  .focus-visible:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+
+  /* Botão com efeito de brilho */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .btn-shine:hover::before {
+    left: 100%;
+  }
+
+  /* Aspect ratios customizados */
+  .aspect-golden {
+    aspect-ratio: 1.618 / 1;
+  }
+
+  /* Transições suaves globais */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
+/* Estilos para lazy loading de imagens */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded,
+img[loading="lazy"]:not([src=""]) {
+  opacity: 1;
+}
+
+/* Prevenção de layout shift */
+img,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Melhorias de performance */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Estados de foco acessíveis */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2 rounded;
+}
+
+/* Animação de pulse suave */
+@keyframes pulse-soft {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Print styles */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Melhorias para modo escuro (futuro) */
+@media (prefers-color-scheme: dark) {
+  /* Preparado para implementação futura */
+}
+
+/* Redução de movimento para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
