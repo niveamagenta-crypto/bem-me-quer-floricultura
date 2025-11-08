@@ -190,4 +190,43 @@ textarea:focus-visible {
   }
 }
 
+/* Hero background fix para mobile */
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* Mobile: scroll normal */
+}
+
+/* Prevenir zoom excessivo no mobile */
+@media (max-width: 767px) {
+  .hero-bg {
+    /* Usar cover mas com position ajustado para evitar zoom excessivo */
+    background-size: cover;
+    /* Ajustar a posição vertical para mostrar melhor a imagem no mobile */
+    background-position: center 35%;
+    min-height: 100vh;
+    /* Garantir que a imagem não fique muito ampliada */
+    transform: scale(1);
+  }
+}
+
+/* Ajuste fino para tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-bg {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/* Desktop: parallax effect completo */
+@media (min-width: 1024px) {
+  .hero-bg {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
 

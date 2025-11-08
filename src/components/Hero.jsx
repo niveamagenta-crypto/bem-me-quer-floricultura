@@ -12,12 +12,9 @@ const Hero = () => {
     >
       {/* Background Image com Parallax Effect */}
       <div 
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 hero-bg"
         style={{
           backgroundImage: 'url(https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=1920&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
         }}
       >
         {/* Overlay Gradient - Mais escuro para reduzir informação visual */}
