@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -11,31 +10,11 @@ import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import ScrollProgress from '../components/ScrollProgress';
 import CTASection from '../components/CTASection';
+import useScrollAnimation from '../hooks/useScrollAnimation';
+import { WHATSAPP_LINK } from '../config/contact';
 
 const Home = () => {
-  useEffect(() => {
-    // Intersection Observer para animações ao rolar
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-visible');
-        }
-      });
-    }, observerOptions);
-
-    // Observar elementos com animação
-    const animatedElements = document.querySelectorAll('.animate-slide-up, .animate-fade-in');
-    animatedElements.forEach(el => observer.observe(el));
-
-    return () => {
-      animatedElements.forEach(el => observer.unobserve(el));
-    };
-  }, []);
+  useScrollAnimation();
 
   return (
     <div className="min-h-screen bg-white">
@@ -75,7 +54,7 @@ const Home = () => {
           title="Pronto Para Começar Seu Projeto?"
           subtitle="Entre em contato e vamos criar algo especial juntos"
           buttonText="Solicitar Orçamento"
-          buttonLink="https://wa.me/5524992771513?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento"
+          buttonLink={WHATSAPP_LINK}
           variant="secondary"
         />
         

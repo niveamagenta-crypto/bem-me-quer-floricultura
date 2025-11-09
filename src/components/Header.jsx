@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import Logo from './Logo';
+import { WHATSAPP_LINK } from '../config/contact';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -86,8 +87,6 @@ const Header = () => {
     { id: 'contato', label: 'Contato' },
   ];
 
-  const whatsappLink = 'https://wa.me/5524992771513?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20[evento/buqu%C3%AA]%2C%20meu%20nome%20%C3%A9%20%5Bseu%20nome%5D';
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -136,7 +135,7 @@ const Header = () => {
 
           {/* CTA Button Desktop */}
           <a
-            href={whatsappLink}
+            href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden lg:flex items-center space-x-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:scale-105"
@@ -175,7 +174,7 @@ const Header = () => {
                 </button>
               ))}
               <a
-                href={whatsappLink}
+                href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mx-6 mt-4 flex items-center justify-center space-x-2 bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-primary-dark transition-colors"

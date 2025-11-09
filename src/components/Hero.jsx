@@ -1,10 +1,9 @@
 import { ArrowRight, Phone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { WHATSAPP_LINK } from '../config/contact';
 
 const Hero = () => {
   const navigate = useNavigate();
-  const whatsappLink = 'https://wa.me/5524992771513?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20[evento/buqu%C3%AA]%2C%20meu%20nome%20%C3%A9%20%5Bseu%20nome%5D';
-
   return (
     <section
       id="inicio"
@@ -40,7 +39,7 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <a
-              href={whatsappLink}
+              href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center space-x-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:shadow-2xl hover:scale-105"

@@ -1,5 +1,6 @@
 import { Heart, Instagram, Phone, MapPin } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { CONTACT_INFO, WHATSAPP_LINK } from '../config/contact';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -114,28 +115,28 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="https://wa.me/5524992771513"
+                  href={WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 text-white/70 hover:text-white transition-colors text-sm group"
                 >
                   <Phone size={18} className="group-hover:scale-110 transition-transform" />
-                  <span>+55 24 99277-1513</span>
+                  <span>{CONTACT_INFO.whatsappDisplay}</span>
                 </a>
               </li>
               <li className="flex items-center space-x-3 text-white/70 text-sm">
                 <MapPin size={18} />
-                <span>Angra dos Reis, RJ</span>
+                <span>{CONTACT_INFO.address}</span>
               </li>
               <li>
                 <a
-                  href="https://instagram.com/bemmequer.angra"
+                  href={CONTACT_INFO.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 text-white/70 hover:text-white transition-colors text-sm group"
                 >
                   <Instagram size={18} className="group-hover:scale-110 transition-transform" />
-                  <span>@bemmequer.angra</span>
+                  <span>{CONTACT_INFO.instagramHandle}</span>
                 </a>
               </li>
             </ul>
@@ -143,7 +144,7 @@ const Footer = () => {
             {/* Social Icons */}
             <div className="flex space-x-4 mt-6">
               <a
-                href="https://instagram.com/bemmequer.angra"
+                href={CONTACT_INFO.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 hover:bg-primary rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -152,7 +153,7 @@ const Footer = () => {
                 <Instagram size={20} />
               </a>
               <a
-                href="https://wa.me/5524992771513"
+                href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 hover:bg-primary rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"

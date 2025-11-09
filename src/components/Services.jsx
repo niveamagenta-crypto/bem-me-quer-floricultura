@@ -1,6 +1,7 @@
 import { Flower2, Heart, Leaf, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { services } from '../data/services';
+import { WHATSAPP_LINK } from '../config/contact';
 
 const iconMap = {
   flower: Flower2,
@@ -10,6 +11,24 @@ const iconMap = {
 
 const Services = () => {
   const navigate = useNavigate();
+
+  const handleServiceLink = (link) => {
+    if (!link) return;
+
+    if (link.startsWith('/')) {
+      navigate(link);
+    } else if (link.startsWith('#')) {
+      const element = document.getElementById(link.substring(1));
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    } else if (link.startsWith('http')) {
+      window.open(link, '_blank');
+    }
+  };
 
   return (
     <section id="servicos" className="py-16 md:py-20 bg-white">
@@ -74,7 +93,7 @@ const Services = () => {
 
                     {/* CTA */}
                     <button
-                      onClick={() => navigate('/portfolio')}
+                      onClick={() => handleServiceLink(service.link)}
                       className="inline-flex items-center space-x-2 text-primary font-semibold group-hover:gap-3 transition-all duration-300"
                     >
                       <span>Ver projetos</span>
@@ -101,7 +120,7 @@ const Services = () => {
             Tem um projeto especial em mente?
           </p>
           <a
-            href="https://wa.me/5524992771513?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20[evento/buqu%C3%AA]%2C%20meu%20nome%20%C3%A9%20%5Bseu%20nome%5D"
+            href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center space-x-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105"

@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { X, Share2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { galleryItems, categories } from '../data/gallery';
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState('todos');
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
+
+  useScrollAnimation({ dependencies: [activeCategory] });
 
   const filteredItems = activeCategory === 'todos'
     ? galleryItems

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Phone, MapPin, Clock, Instagram, Send } from 'lucide-react';
+import { CONTACT_INFO, WHATSAPP_LINK, buildWhatsappLink } from '../config/contact';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const Contact = () => {
     
     // Criar mensagem WhatsApp
     const message = `Olá, meu nome é ${formData.name}.\nTelefone: ${formData.phone}\n\n${formData.message}`;
-    const whatsappUrl = `https://wa.me/5524992771513?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = buildWhatsappLink(message);
     
     // Abrir WhatsApp
     window.open(whatsappUrl, '_blank');
@@ -68,7 +69,7 @@ const Contact = () => {
             <div className="grid gap-4">
               {/* WhatsApp */}
               <a
-                href="https://wa.me/5524992771513"
+                href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start space-x-4 p-6 bg-sand rounded-2xl hover:shadow-lg transition-all duration-300 group"
@@ -78,7 +79,7 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">WhatsApp</h3>
-                  <p className="text-gray-600">+55 24 99277-1513</p>
+                  <p className="text-gray-600">{CONTACT_INFO.whatsappDisplay}</p>
                   <p className="text-sm text-primary mt-1">Clique para chamar →</p>
                 </div>
               </a>
@@ -90,7 +91,7 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">Localização</h3>
-                  <p className="text-gray-600">Angra dos Reis, RJ – Brasil</p>
+                  <p className="text-gray-600">{CONTACT_INFO.address}</p>
                 </div>
               </div>
 
@@ -101,14 +102,14 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">Horário</h3>
-                  <p className="text-gray-600">Segunda a Sábado: 9h - 18h</p>
-                  <p className="text-gray-600">Domingo: Sob consulta</p>
+                  <p className="text-gray-600">{CONTACT_INFO.serviceHours.weekdays}</p>
+                  <p className="text-gray-600">{CONTACT_INFO.serviceHours.sunday}</p>
                 </div>
               </div>
 
               {/* Instagram */}
               <a
-                href="https://instagram.com/bemmequer.angra"
+                href={CONTACT_INFO.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start space-x-4 p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl hover:shadow-lg transition-all duration-300 group"
@@ -118,7 +119,7 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-800 mb-1">Instagram</h3>
-                  <p className="text-gray-600">@bemmequer.angra</p>
+                  <p className="text-gray-600">{CONTACT_INFO.instagramHandle}</p>
                   <p className="text-sm text-pink-600 mt-1">1.671 seguidores →</p>
                 </div>
               </a>
