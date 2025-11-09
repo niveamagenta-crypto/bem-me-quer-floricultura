@@ -7,27 +7,6 @@ export const testimonials = [
       'A Bem Me Quer transformou nosso altar em um jardim suspenso. Cada detalhe refletia nossa história, sem exagero e com muito carinho.',
   },
   {
-    id: 'joana-medeiros',
-    client: 'Joana Medeiros',
-    project: 'Lançamento corporativo',
-    quote:
-      'O briefing virou uma experiência botânica completa. A equipe antecipou dores do evento e entregou um cenário sofisticado sem perder a leveza.',
-  },
-  {
-    id: 'marina-lago',
-    client: 'Marina Lago',
-    project: 'Editorial de moda',
-    quote:
-      'Precisávamos de algo sofisticado, mas com personalidade. As esculturas florais criadas pela Bem Me Quer elevaram o conceito da campanha.',
-  },
-  {
-    id: 'cassia-freitas',
-    client: 'Cássia Freitas',
-    project: 'Experiência botanical bar',
-    quote:
-      'O bar vivo foi o ponto alto da noite. Da concepção à execução, a equipe conduziu tudo com técnica e acolhimento.',
-  },
-  {
     id: 'rodrigo-almeida',
     client: 'Rodrigo Almeida',
     project: 'Celebração intimista',
