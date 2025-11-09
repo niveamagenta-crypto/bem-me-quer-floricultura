@@ -1,59 +1,45 @@
-export const testimonialMedia = [
+export const testimonials = [
   {
     id: 'ana-lucas',
-    type: 'video',
-    role: 'casal',
-    title: 'Ana & Lucas — Destination Wedding',
-    duration: '00:36',
-    videoSrc: 'https://cdn.coverr.co/videos/coverr-a-bride-getting-ready-0478/1080p.mp4',
-    poster:
-      'https://images.unsplash.com/photo-1520854221050-0f4caff449fb?auto=format&fit=crop&w=900&q=80',
-    transcript:
-      'Começamos com uma ideia tímida e a Bem Me Quer traduziu tudo que queríamos. O altar ficou como um jardim suspenso. Foi surreal.',
-    location: 'Angra dos Reis',
-    tags: ['wedding', 'destination'],
+    client: 'Ana & Lucas',
+    project: 'Destination wedding em Angra dos Reis',
+    quote:
+      'A Bem Me Quer transformou nosso altar em um jardim suspenso. Cada detalhe refletia nossa história, sem exagero e com muito carinho.',
   },
   {
-    id: 'joana-corporate',
-    type: 'video',
-    role: 'marketing',
-    title: 'Joana — Lançamento corporativo',
-    duration: '00:28',
-    videoSrc: 'https://cdn.coverr.co/videos/coverr-a-flower-shop-7979/1080p.mp4',
-    poster:
-      'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?auto=format&fit=crop&w=900&q=80',
-    transcript:
-      'Eles trouxeram uma atmosfera sensorial para o evento. O briefing virou uma experiência botânica completa.',
-    location: 'Rio de Janeiro',
-    tags: ['corporate', 'experience'],
+    id: 'joana-medeiros',
+    client: 'Joana Medeiros',
+    project: 'Lançamento corporativo',
+    quote:
+      'O briefing virou uma experiência botânica completa. A equipe antecipou dores do evento e entregou um cenário sofisticado sem perder a leveza.',
   },
   {
-    id: 'marina-editorial',
-    type: 'video',
-    role: 'diretora criativa',
-    title: 'Marina — Editorial de moda',
-    duration: '00:32',
-    videoSrc: 'https://cdn.coverr.co/videos/coverr-flower-arrangement-8070/1080p.mp4',
-    poster:
-      'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80',
-    transcript:
-      'Precisávamos de algo sofisticado, mas experimental. A equipe construiu esculturas florais sob medida para a campanha.',
-    location: 'São Paulo',
-    tags: ['editorial', 'fashion'],
+    id: 'marina-lago',
+    client: 'Marina Lago',
+    project: 'Editorial de moda',
+    quote:
+      'Precisávamos de algo sofisticado, mas com personalidade. As esculturas florais criadas pela Bem Me Quer elevaram o conceito da campanha.',
   },
   {
-    id: 'cassia-plants',
-    type: 'video',
-    role: 'event planner',
-    title: 'Cássia — Experiência botanical bar',
-    duration: '00:24',
-    videoSrc: 'https://cdn.coverr.co/videos/coverr-plant-nursery-planting-flowers-9004/1080p.mp4',
-    poster:
-      'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=900&q=80',
-    transcript:
-      'From briefing à execução, tudo fez sentido. Os convidados ficaram hipnotizados com a instalação viva no bar.',
-    location: 'Paraty',
-    tags: ['experiência', 'plantas'],
+    id: 'cassia-freitas',
+    client: 'Cássia Freitas',
+    project: 'Experiência botanical bar',
+    quote:
+      'O bar vivo foi o ponto alto da noite. Da concepção à execução, a equipe conduziu tudo com técnica e acolhimento.',
+  },
+  {
+    id: 'rodrigo-almeida',
+    client: 'Rodrigo Almeida',
+    project: 'Celebração intimista',
+    quote:
+      'Queríamos um jantar pequeno que parecesse um abraço. A curadoria de flores e aromas criou exatamente essa atmosfera.',
+  },
+  {
+    id: 'fernanda-souza',
+    client: 'Fernanda Souza',
+    project: 'Aniversário temático',
+    quote:
+      'A consultoria de estilo floral foi essencial. Conseguimos um ambiente divertido e elegante, com um investimento muito bem direcionado.',
   },
 ];
 

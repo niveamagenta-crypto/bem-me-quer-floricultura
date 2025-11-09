@@ -27,8 +27,21 @@ const FloatingFooterCTA = () => {
   const eventType = watch('eventType');
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      setShouldDisplay(true);
+      return undefined;
+    }
+
     const footer = document.getElementById('contato');
-    if (!footer) return undefined;
+    if (!footer) {
+      setShouldDisplay(false);
+      return undefined;
+    }
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setShouldDisplay(true);
+      return undefined;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {

@@ -6,23 +6,23 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = '', prefix = '' }) => 
   const counterRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !isVisible) {
+        setIsVisible(true);
+      }
+    }, { threshold: 0.3 });
 
     if (counterRef.current) {
       observer.observe(counterRef.current);
     }
 
     return () => {
-      if (counterRef.current) {
-        observer.unobserve(counterRef.current);
-      }
+      observer.disconnect();
     };
   }, [isVisible]);
 

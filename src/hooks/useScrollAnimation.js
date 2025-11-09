@@ -23,6 +23,20 @@ const useScrollAnimation = ({
   useEffect(() => {
     const options = observerOptions ?? DEFAULT_OBSERVER_OPTIONS;
 
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return undefined;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      const fallbackElements = document.querySelectorAll(selector);
+      fallbackElements.forEach((element) => {
+        element.classList.add("animate-visible");
+      });
+      return undefined;
+    }
+
+    const observedElements = new Set();
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -35,12 +49,12 @@ const useScrollAnimation = ({
       const elements = document.querySelectorAll(selector);
 
       elements.forEach((element) => {
-        if (element.dataset.animationObserved === "true") {
+        if (observedElements.has(element)) {
           return;
         }
 
-        element.dataset.animationObserved = "true";
         observer.observe(element);
+        observedElements.add(element);
       });
     };
 
@@ -55,6 +69,11 @@ const useScrollAnimation = ({
     return () => {
       observer.disconnect();
       mutationObserver.disconnect();
+      observedElements.forEach((element) => {
+        observer.unobserve(element);
+        element.classList.add("animate-visible");
+      });
+      observedElements.clear();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selector, observerOptions, ...dependencies]);
