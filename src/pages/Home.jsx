@@ -18,7 +18,6 @@ import FloatingFooterCTA from '../components/cta/FloatingFooterCTA';
 
 const Testimonials = lazy(() => import('../components/Testimonials'));
 const Contact = lazy(() => import('../components/Contact'));
-const Gallery = lazy(() => import('../components/Gallery'));
 
 const SectionFallback = ({ title }) => (
   <div className="py-24 text-center text-xs font-semibold uppercase tracking-[0.35em] text-gray-400">
@@ -73,10 +72,6 @@ const Home = () => {
           buttonLink="/portfolio"
           variant="primary"
         />
-        
-        <Suspense fallback={<SectionFallback title="galeria" />}>
-          <Gallery />
-        </Suspense>
         
         <Suspense fallback={<SectionFallback title="depoimentos" />}>
           <Testimonials />

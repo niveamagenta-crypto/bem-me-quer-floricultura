@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Phone } from 'lucide-react';
 import clsx from 'clsx';
@@ -21,8 +21,6 @@ const HeroSection = () => {
 
   const animatedGradientOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.3]);
   const animatedTranslate = useTransform(scrollYProgress, [0, 1], ['0%', '-20%']);
-
-  const heroGreeting = useMemo(() => timeOfDayTheme.greeting, [timeOfDayTheme.greeting]);
 
   const motionConfig = (delay = 0) =>
     prefersReducedMotion
@@ -57,14 +55,6 @@ const HeroSection = () => {
 
       <div className="container relative z-10 mx-auto px-4 md:px-6 lg:px-12">
         <div className="max-w-4xl">
-          <motion.span
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white/90 backdrop-blur"
-            {...motionConfig(0)}
-          >
-            <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
-            {heroGreeting}
-          </motion.span>
-
           <motion.h1
             className="mt-6 font-display text-5xl font-semibold text-white drop-shadow md:text-7xl"
             {...motionConfig(0.15)}
@@ -74,7 +64,7 @@ const HeroSection = () => {
               className="mt-4 block font-sans text-2xl font-light uppercase tracking-widest text-white/80 md:text-3xl"
               {...motionConfig(0.24)}
             >
-              Floricultura Artística em Angra dos Reis
+              Floricultura em Angra dos Reis
             </motion.span>
           </motion.h1>
 
@@ -82,7 +72,7 @@ const HeroSection = () => {
             className="mt-6 max-w-2xl text-lg font-light text-white/85 md:text-2xl"
             {...motionConfig(0.36)}
           >
-            Buquês autorais, cenografias botânicas e experiências florais sob medida. Há cinco anos
+            Buquês autorais, Ornamentação de Eventos e Plantas de Cultivo sob medida. Há cinco anos
             criando narrativas que transformam eventos em memórias inesquecíveis.
           </motion.p>
 

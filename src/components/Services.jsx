@@ -28,21 +28,10 @@ const themeConfig = {
     accent: 'from-secondary/25 via-secondary/10 to-transparent',
     label: 'Botânica viva',
   },
-  editorial: {
-    badge: 'bg-gold/15 text-gold-dark',
-    accent: 'from-gold/20 via-gold/10 to-transparent',
-    label: 'Editorial & moda',
-  },
-  experience: {
-    badge: 'bg-rose-200/40 text-primary-dark',
-    accent: 'from-rose-200/40 via-rose-100/30 to-transparent',
-    label: 'Experiências criativas',
-  },
 };
 
 const layoutMap = {
-  landscape: 'md:col-span-7 lg:col-span-7',
-  portrait: 'md:col-span-5 lg:col-span-5',
+  portrait: 'md:col-span-4 lg:col-span-4',
 };
 
 const Services = () => {
@@ -104,8 +93,7 @@ const Services = () => {
                 key={service.id}
                 className={clsx(
                   'group relative overflow-hidden rounded-[32px] border border-white/40 bg-white shadow-[0_25px_45px_-30px_rgba(0,0,0,0.2)] transition hover:-translate-y-2 hover:shadow-[0_45px_65px_-30px_rgba(217,91,108,0.3)]',
-                  layoutClass,
-                  index % 2 === 1 ? 'md:-mt-12 lg:-mt-16' : ''
+                  layoutClass
                 )}
                 {...motionCard(index * 0.08)}
               >

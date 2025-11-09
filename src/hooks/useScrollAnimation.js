@@ -23,12 +23,6 @@ const useScrollAnimation = ({
   useEffect(() => {
     const options = observerOptions ?? DEFAULT_OBSERVER_OPTIONS;
 
-    const elements = document.querySelectorAll(selector);
-
-    if (!elements.length) {
-      return undefined;
-    }
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -37,11 +31,30 @@ const useScrollAnimation = ({
       });
     }, options);
 
-    elements.forEach((element) => observer.observe(element));
+    const observeElements = () => {
+      const elements = document.querySelectorAll(selector);
+
+      elements.forEach((element) => {
+        if (element.dataset.animationObserved === "true") {
+          return;
+        }
+
+        element.dataset.animationObserved = "true";
+        observer.observe(element);
+      });
+    };
+
+    observeElements();
+
+    const mutationObserver = new MutationObserver(() => {
+      observeElements();
+    });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      elements.forEach((element) => observer.unobserve(element));
       observer.disconnect();
+      mutationObserver.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selector, observerOptions, ...dependencies]);
