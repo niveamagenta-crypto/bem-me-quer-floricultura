@@ -1,6 +1,8 @@
 import { MessageCircle, X } from 'lucide-react';
 import { useState } from 'react';
+import Lottie from 'lottie-react';
 import { CONTACT_INFO, WHATSAPP_LINK } from '../config/contact';
+import bloomAnimation from '../assets/animations/whatsapp-bloom.json';
 
 const FloatingWhatsApp = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,16 +29,23 @@ const FloatingWhatsApp = () => {
       >
         {/* Main Button */}
         <div className="relative">
-          <button
-            type="button"
-            onClick={handlePrimaryClick}
-            onFocus={() => setIsOpen(true)}
-            onBlur={() => setIsOpen(false)}
-            className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-300"
-            aria-label="Chamar no WhatsApp"
-          >
-            <MessageCircle size={32} className="text-white" />
-          </button>
+          <div className="relative flex items-center justify-center">
+            <Lottie
+              animationData={bloomAnimation}
+              loop
+              className="pointer-events-none absolute h-24 w-24 opacity-70"
+            />
+            <button
+              type="button"
+              onClick={handlePrimaryClick}
+              onFocus={() => setIsOpen(true)}
+              onBlur={() => setIsOpen(false)}
+              className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-green-600 text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:from-green-500 hover:to-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-300"
+              aria-label="Chamar no WhatsApp"
+            >
+              <MessageCircle size={32} className="text-white" />
+            </button>
+          </div>
 
           {/* Tooltip */}
           <div

@@ -1,6 +1,6 @@
+import { Suspense, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import Gallery from '../components/Gallery';
 import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import ScrollProgress from '../components/ScrollProgress';
@@ -8,6 +8,8 @@ import CTASection from '../components/CTASection';
 import { ArrowLeft } from 'lucide-react';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import { WHATSAPP_LINK } from '../config/contact';
+
+const Gallery = lazy(() => import('../components/Gallery'));
 
 const Portfolio = () => {
   const navigate = useNavigate();
@@ -34,7 +36,9 @@ const Portfolio = () => {
         </section>
 
         {/* Gallery */}
-        <Gallery />
+        <Suspense fallback={<div className="py-24 text-center text-xs font-semibold uppercase tracking-[0.35em] text-gray-400">Carregando galeria…</div>}>
+          <Gallery />
+        </Suspense>
         
         {/* CTA */}
         <CTASection 

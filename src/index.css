@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,8 +10,7 @@
   }
 
   body {
-    @apply font-sans text-gray-900 antialiased;
-    background-color: #F6EEE9;
+    @apply font-sans text-gray-900 antialiased bg-sand;
   }
 
   * {

@@ -1,0 +1,5 @@
+Data: 2025-11-09
+Fase atual: Fase 3 – Conversão + Microinterações
+Etapa: Implementação concluída (wizard de contato em 4 etapas com validação zod + integração WhatsApp/e-mail, barra CTA flutuante inteligente ao atingir o rodapé, microinterações com Lottie e efeitos bloom no About)
+Próximos passos: com o code-splitting/manualChunks implementado (wizard/galeria/motion em chunks dedicados), validar acessibilidade das novas interações (foco, leitores de tela), executar testes cross-device e revisar assets hospedados antes do deploy na Vercel.
+

@@ -1,35 +1,10 @@
-import { useState } from 'react';
-import { Phone, MapPin, Clock, Instagram, Send } from 'lucide-react';
-import { CONTACT_INFO, WHATSAPP_LINK, buildWhatsappLink } from '../config/contact';
+import { Suspense, lazy } from 'react';
+import { Phone, MapPin, Clock, Instagram } from 'lucide-react';
+import { CONTACT_INFO, WHATSAPP_LINK } from '../config/contact';
+
+const ContactWizard = lazy(() => import('./forms/ContactWizard'));
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    message: '',
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // Criar mensagem WhatsApp
-    const message = `Olá, meu nome é ${formData.name}.\nTelefone: ${formData.phone}\n\n${formData.message}`;
-    const whatsappUrl = buildWhatsappLink(message);
-    
-    // Abrir WhatsApp
-    window.open(whatsappUrl, '_blank');
-    
-    // Limpar formulário
-    setFormData({ name: '', phone: '', message: '' });
-  };
-
   return (
     <section id="contato" className="py-16 md:py-20 bg-white">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -126,79 +101,17 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Contact Wizard */}
           <div className="animate-slide-up">
-            <div className="bg-sand rounded-3xl p-8 shadow-xl">
-              <h3 className="font-display text-2xl font-bold text-gray-800 mb-6">
-                Envie sua Mensagem
-              </h3>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name */}
-                <div>
-                  <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
-                    Nome Completo *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                    placeholder="Seu nome"
-                  />
+            <Suspense
+              fallback={
+                <div className="rounded-3xl bg-white p-8 text-center text-sm uppercase tracking-[0.35em] text-gray-400 shadow-inner">
+                  Preparando wizard…
                 </div>
-
-                {/* Phone */}
-                <div>
-                  <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">
-                    WhatsApp / Telefone *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                    placeholder="(00) 00000-0000"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
-                    Mensagem *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows="5"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
-                    placeholder="Conte-nos sobre seu projeto ou dúvida..."
-                  ></textarea>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center space-x-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105"
-                >
-                  <span>Enviar via WhatsApp</span>
-                  <Send size={20} />
-                </button>
-
-                <p className="text-center text-sm text-gray-500">
-                  * Você será redirecionado para o WhatsApp
-                </p>
-              </form>
-            </div>
+              }
+            >
+              <ContactWizard />
+            </Suspense>
           </div>
         </div>
       </div>

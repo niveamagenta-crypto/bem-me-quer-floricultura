@@ -17,6 +17,11 @@ export default {
           dark: '#1A3D2B',
           light: '#2E6647',
         },
+        tertiary: {
+          DEFAULT: '#B8A0CB',
+          dark: '#9B84C0',
+          light: '#D1BEE0',
+        },
         sand: {
           DEFAULT: '#F6EEE9',
           dark: '#EFE3DB',
@@ -28,7 +33,7 @@ export default {
       },
       fontFamily: {
         display: ['Playfair Display', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',

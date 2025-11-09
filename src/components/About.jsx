@@ -1,5 +1,7 @@
 import { Heart, Flower2, Award, Sparkles, TrendingUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 import AnimatedCounter from './AnimatedCounter';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 const About = () => {
   const timeline = [
@@ -39,6 +41,8 @@ const About = () => {
       color: 'bg-primary',
     },
   ];
+
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
     <section id="sobre" className="py-16 md:py-20 bg-sand">
@@ -84,21 +88,39 @@ const About = () => {
             {/* Stats - Com Números Animados */}
             <div className="grid grid-cols-3 gap-4 pt-6">
               <div className="text-center group">
-                <div className="text-3xl font-bold text-primary font-display">
+                <motion.div
+                  className="text-3xl font-bold text-primary font-display"
+                  initial={prefersReducedMotion ? undefined : { scale: 0.9, opacity: 0 }}
+                  whileInView={prefersReducedMotion ? undefined : { scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, ease: [0.24, 0.12, 0.25, 1] }}
+                >
                   <AnimatedCounter end={5} suffix="+" />
-                </div>
+                </motion.div>
                 <div className="text-sm text-gray-600">Anos de história</div>
               </div>
               <div className="text-center group">
-                <div className="text-3xl font-bold text-secondary font-display">
+                <motion.div
+                  className="text-3xl font-bold text-secondary font-display"
+                  initial={prefersReducedMotion ? undefined : { scale: 0.9, opacity: 0 }}
+                  whileInView={prefersReducedMotion ? undefined : { scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: [0.24, 0.12, 0.25, 1] }}
+                >
                   <AnimatedCounter end={20} suffix="+" />
-                </div>
+                </motion.div>
                 <div className="text-sm text-gray-600">Eventos realizados</div>
               </div>
               <div className="text-center group">
-                <div className="text-3xl font-bold text-gold font-display">
+                <motion.div
+                  className="text-3xl font-bold text-gold font-display"
+                  initial={prefersReducedMotion ? undefined : { scale: 0.9, opacity: 0 }}
+                  whileInView={prefersReducedMotion ? undefined : { scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: 0.2, ease: [0.24, 0.12, 0.25, 1] }}
+                >
                   <AnimatedCounter end={1.6} suffix="k+" />
-                </div>
+                </motion.div>
                 <div className="text-sm text-gray-600">Seguidores</div>
               </div>
             </div>
@@ -120,17 +142,32 @@ const About = () => {
               {timeline.map((item, index) => {
                 const Icon = item.icon;
                 return (
-                  <div
+                  <motion.div
                     key={item.year}
-                    className="relative flex items-start gap-6 animate-slide-up"
-                    style={{ animationDelay: `${index * 100}ms` }}
+                    className="relative flex items-start gap-6"
+                    initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
+                    whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.6, delay: index * 0.08, ease: [0.24, 0.12, 0.25, 1] }}
                   >
-                    {/* Icon Circle */}
-                    <div className="flex-shrink-0 relative z-10">
-                      <div className={`w-12 h-12 ${item.color} rounded-full flex items-center justify-center shadow-lg`}>
-                        <Icon className="text-white" size={24} />
-                      </div>
-                    </div>
+                    <motion.div
+                      className="relative z-10 flex-shrink-0"
+                      whileHover={prefersReducedMotion ? undefined : { scale: 1.12 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                    >
+                      <motion.div
+                        className={`relative flex h-12 w-12 items-center justify-center rounded-full shadow-lg ${item.color}`}
+                      >
+                        <motion.span
+                          className="absolute inset-0 rounded-full bg-white/30 blur-lg"
+                          initial={{ opacity: 0 }}
+                          whileInView={prefersReducedMotion ? undefined : { opacity: 0.9, scale: 1.2 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, delay: 0.1 }}
+                        />
+                        <Icon className="relative text-white" size={24} />
+                      </motion.div>
+                    </motion.div>
 
                     {/* Content */}
                     <div className="flex-1 pb-2">
@@ -144,7 +181,7 @@ const About = () => {
                         {item.description}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

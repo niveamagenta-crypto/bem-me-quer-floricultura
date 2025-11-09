@@ -1,31 +1,57 @@
+import { Suspense, lazy } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import About from '../components/About';
 import Services from '../components/Services';
 import HowItWorks from '../components/HowItWorks';
 import Differentials from '../components/Differentials';
-import Testimonials from '../components/Testimonials';
-import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import ScrollProgress from '../components/ScrollProgress';
 import CTASection from '../components/CTASection';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import { WHATSAPP_LINK } from '../config/contact';
+import ManifestoSection from '../components/ManifestoSection';
+import VideoTestimonialSection from '../components/VideoTestimonialSection';
+import About from '../components/About';
+import useScrollChromaticBackground from '../hooks/useScrollChromaticBackground';
+import FloatingFooterCTA from '../components/cta/FloatingFooterCTA';
+
+const Testimonials = lazy(() => import('../components/Testimonials'));
+const Contact = lazy(() => import('../components/Contact'));
+const Gallery = lazy(() => import('../components/Gallery'));
+
+const SectionFallback = ({ title }) => (
+  <div className="py-24 text-center text-xs font-semibold uppercase tracking-[0.35em] text-gray-400">
+    Carregando {title}…
+  </div>
+);
 
 const Home = () => {
   useScrollAnimation();
+  const backgroundGradient = useScrollChromaticBackground();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div
+      className="relative min-h-screen transition-colors duration-700"
+      style={{
+        backgroundImage: backgroundGradient,
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       <ScrollProgress />
       <Header />
       
       <main>
         <Hero />
-        
+
+        <ManifestoSection />
+
+        <VideoTestimonialSection />
+
         <About />
-        
+
         <CTASection 
           title="Conheça Nossos Serviços"
           subtitle="Descubra como podemos transformar seu evento em algo inesquecível"
@@ -48,7 +74,13 @@ const Home = () => {
           variant="primary"
         />
         
-        <Testimonials />
+        <Suspense fallback={<SectionFallback title="galeria" />}>
+          <Gallery />
+        </Suspense>
+        
+        <Suspense fallback={<SectionFallback title="depoimentos" />}>
+          <Testimonials />
+        </Suspense>
         
         <CTASection 
           title="Pronto Para Começar Seu Projeto?"
@@ -58,11 +90,14 @@ const Home = () => {
           variant="secondary"
         />
         
-        <Contact />
+        <Suspense fallback={<SectionFallback title="formulário de contato" />}>
+          <Contact />
+        </Suspense>
       </main>
 
       <Footer />
       <FloatingWhatsApp />
+      <FloatingFooterCTA />
     </div>
   );
 };

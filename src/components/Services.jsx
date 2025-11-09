@@ -1,7 +1,10 @@
 import { Flower2, Heart, Leaf, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import clsx from 'clsx';
 import { services } from '../data/services';
 import { WHATSAPP_LINK } from '../config/contact';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 const iconMap = {
   flower: Flower2,
@@ -9,8 +12,42 @@ const iconMap = {
   leaf: Leaf,
 };
 
+const themeConfig = {
+  events: {
+    badge: 'bg-primary/15 text-primary-dark',
+    accent: 'from-primary/20 via-primary/5 to-transparent',
+    label: 'Eventos assinatura',
+  },
+  bouquets: {
+    badge: 'bg-tertiary/15 text-tertiary-dark',
+    accent: 'from-tertiary/20 via-tertiary/5 to-transparent',
+    label: 'Bouquets autorais',
+  },
+  botanical: {
+    badge: 'bg-secondary/10 text-secondary',
+    accent: 'from-secondary/25 via-secondary/10 to-transparent',
+    label: 'Botânica viva',
+  },
+  editorial: {
+    badge: 'bg-gold/15 text-gold-dark',
+    accent: 'from-gold/20 via-gold/10 to-transparent',
+    label: 'Editorial & moda',
+  },
+  experience: {
+    badge: 'bg-rose-200/40 text-primary-dark',
+    accent: 'from-rose-200/40 via-rose-100/30 to-transparent',
+    label: 'Experiências criativas',
+  },
+};
+
+const layoutMap = {
+  landscape: 'md:col-span-7 lg:col-span-7',
+  portrait: 'md:col-span-5 lg:col-span-5',
+};
+
 const Services = () => {
   const navigate = useNavigate();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const handleServiceLink = (link) => {
     if (!link) return;
@@ -30,105 +67,126 @@ const Services = () => {
     }
   };
 
+  const motionCard = (delay = 0) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: '0px 0px -100px 0px' },
+          transition: { duration: 0.7, delay, ease: [0.24, 0.12, 0.25, 1] },
+        };
+
   return (
-    <section id="servicos" className="py-16 md:py-20 bg-white">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16 animate-slide-up">
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">
+    <section id="servicos" className="bg-white py-24 md:py-28">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12">
+        <motion.div className="mx-auto max-w-3xl text-center" {...motionCard(0)}>
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-primary-dark">
             O que fazemos
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-800 mt-2">
-            Nossos Serviços
+          <h2 className="mt-6 font-display text-4xl text-secondary md:text-5xl">
+            Curadoria floral para cada ocasião
           </h2>
-          <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-            Criamos experiências florais únicas para cada ocasião especial
+          <p className="mt-6 text-lg leading-relaxed text-gray-600">
+            Do primeiro moodboard aos últimos ajustes no grande dia, desenhamos experiências vivas
+            com identidade, cuidado e ritmo editorial.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mt-16 grid gap-6 md:grid-cols-12">
           {services.map((service, index) => {
             const Icon = iconMap[service.icon];
-            
+            const theme = themeConfig[service.theme] || themeConfig.events;
+            const layoutClass = layoutMap[service.layout] || layoutMap.portrait;
+
             return (
-              <div
+              <motion.article
                 key={service.id}
-                className="group relative rounded-3xl overflow-hidden animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={clsx(
+                  'group relative overflow-hidden rounded-[32px] border border-white/40 bg-white shadow-[0_25px_45px_-30px_rgba(0,0,0,0.2)] transition hover:-translate-y-2 hover:shadow-[0_45px_65px_-30px_rgba(217,91,108,0.3)]',
+                  layoutClass,
+                  index % 2 === 1 ? 'md:-mt-12 lg:-mt-16' : ''
+                )}
+                {...motionCard(index * 0.08)}
               >
-                {/* Glassmorphism Card */}
-                <div className="relative bg-white/70 backdrop-blur-sm border border-white/20 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:scale-105">
-                  {/* Gradient Glow on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/10 group-hover:via-primary/5 group-hover:to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                  
-                  {/* Image */}
-                  <div className="aspect-[4/3] overflow-hidden relative">
+                <div
+                  className={clsx(
+                    'absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100',
+                    theme.accent
+                  )}
+                />
+
+                <div className="relative grid h-full overflow-hidden md:grid-cols-[0.9fr_1fr]">
+                  <div className="relative h-full">
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-110 group-hover:brightness-110 transition-all duration-700"
                       loading="lazy"
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                     />
-                    {/* Image Overlay on Hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-black/30" />
+                    <div className="absolute bottom-6 left-6 flex items-center gap-3 rounded-full bg-white/75 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-gray-700">
+                      {service.category || theme.label}
+                    </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-8 relative z-10">
-                    {/* Icon */}
-                    <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
-                      {Icon && <Icon className="text-white" size={28} />}
+                  <div className="flex flex-col justify-between gap-6 p-8 md:p-10">
+                    <div className="space-y-4">
+                      <span
+                        className={clsx(
+                          'inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em]',
+                          theme.badge
+                        )}
+                      >
+                        {theme.label}
+                      </span>
+                      <h3 className="font-display text-2xl text-secondary md:text-3xl">
+                        {service.title}
+                      </h3>
+                      <p className="text-base leading-relaxed text-gray-600">
+                        {service.description}
+                      </p>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="font-display text-2xl font-bold text-gray-800 mb-3 group-hover:text-primary transition-colors">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-gray-600 leading-relaxed mb-6">
-                      {service.description}
-                    </p>
-
-                    {/* CTA */}
-                    <button
-                      onClick={() => handleServiceLink(service.link)}
-                      className="inline-flex items-center space-x-2 text-primary font-semibold group-hover:gap-3 transition-all duration-300"
-                    >
-                      <span>Ver projetos</span>
-                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-
-                  {/* Decorative Corner */}
-                  <div className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-primary/30 rounded-tr-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  {/* Shine Effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                    <div className="absolute top-0 -left-full h-full w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:left-full transition-all duration-1000"></div>
+                    <div className="flex items-center justify-between gap-4 border-t border-gray-100 pt-6">
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-inner">
+                          {Icon && <Icon className="text-primary" size={24} />}
+                        </span>
+                        <p className="text-sm text-gray-500">Moodboards, paletas e execução completa</p>
+                      </div>
+                      <button
+                        onClick={() => handleServiceLink(service.link)}
+                        className="group/cta inline-flex items-center gap-2 rounded-full border border-transparent bg-black/90 px-5 py-3 text-sm font-semibold text-white transition hover:bg-black"
+                      >
+                        <span>{service.ctaLabel || 'Ver projetos'}</span>
+                        <ArrowRight
+                          size={16}
+                          className="transition-transform duration-300 group-hover/cta:translate-x-1"
+                        />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.article>
             );
           })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-16 animate-slide-up">
-          <p className="text-gray-600 mb-6">
-            Tem um projeto especial em mente?
+        <motion.div className="mt-20 text-center" {...motionCard(0.2)}>
+          <p className="text-gray-600">
+            Tem um projeto especial em mente? Vamos criar um storyboard floral juntos.
           </p>
           <a
             href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105"
+            className="mt-6 inline-flex items-center gap-3 rounded-full border border-primary/30 bg-primary px-8 py-4 text-white shadow-elegant transition hover:bg-primary-dark"
           >
-            <span>Solicitar Orçamento</span>
+            <span>Solicitar orçamento</span>
             <ArrowRight size={20} />
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
