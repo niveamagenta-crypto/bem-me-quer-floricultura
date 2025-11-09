@@ -1,14 +1,27 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
+import useIsCoarsePointer from '../../hooks/useIsCoarsePointer';
 
 const SmoothScrollProvider = ({ children }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const isCoarsePointer = useIsCoarsePointer();
 
   useEffect(() => {
+    const root = document.documentElement;
+
     if (prefersReducedMotion) {
-      document.documentElement.style.scrollBehavior = 'smooth';
-      return undefined;
+      root.style.scrollBehavior = 'smooth';
+      return () => {
+        root.style.removeProperty('scroll-behavior');
+      };
+    }
+
+    if (isCoarsePointer) {
+      root.style.scrollBehavior = 'auto';
+      return () => {
+        root.style.removeProperty('scroll-behavior');
+      };
     }
 
     const lenis = new Lenis({
@@ -17,7 +30,7 @@ const SmoothScrollProvider = ({ children }) => {
       smoothTouch: false,
     });
 
-    document.documentElement.style.scrollBehavior = 'auto';
+    root.style.scrollBehavior = 'auto';
 
     let animationFrame;
     const raf = (time) => {
@@ -30,9 +43,9 @@ const SmoothScrollProvider = ({ children }) => {
     return () => {
       cancelAnimationFrame(animationFrame);
       lenis.destroy();
-      document.documentElement.style.scrollBehavior = 'smooth';
+      root.style.removeProperty('scroll-behavior');
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, isCoarsePointer]);
 
   return children;
 };

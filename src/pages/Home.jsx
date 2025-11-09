@@ -15,6 +15,7 @@ import VideoTestimonialSection from '../components/VideoTestimonialSection';
 import About from '../components/About';
 import useScrollChromaticBackground from '../hooks/useScrollChromaticBackground';
 import FloatingFooterCTA from '../components/cta/FloatingFooterCTA';
+import useIsCoarsePointer from '../hooks/useIsCoarsePointer';
 
 const Testimonials = lazy(() => import('../components/Testimonials'));
 const Contact = lazy(() => import('../components/Contact'));
@@ -28,13 +29,14 @@ const SectionFallback = ({ title }) => (
 const Home = () => {
   useScrollAnimation();
   const backgroundGradient = useScrollChromaticBackground();
+  const isCoarsePointer = useIsCoarsePointer();
 
   return (
     <div
       className="relative min-h-screen transition-colors duration-700"
       style={{
         backgroundImage: backgroundGradient,
-        backgroundAttachment: 'fixed',
+        backgroundAttachment: isCoarsePointer ? 'scroll' : 'fixed',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
       }}
