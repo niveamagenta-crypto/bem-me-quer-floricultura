@@ -37,7 +37,7 @@ const HeroVideoBackground = ({ prefersReducedMotion, overlayGradient }) => {
         className="absolute inset-0 mix-blend-multiply transition-colors duration-700"
         style={{ backgroundImage: overlayGradient }}
       />
-      <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-black/65 to-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/35 to-black/20" />
     </div>
   );
 };
