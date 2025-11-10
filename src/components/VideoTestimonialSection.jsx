@@ -21,8 +21,8 @@ const VideoTestimonialSection = () => {
         };
 
   return (
-    <section className="relative -mt-20 pb-24 md:-mt-28">
-      <div className="container mx-auto px-4 md:px-6 lg:px-12">
+    <section className="relative -mt-14 md:-mt-20 lg:-mt-24 pb-24">
+      <div className="container mx-auto px-4 pt-10 md:px-6 md:pt-14 lg:px-12 lg:pt-18">
         <motion.div
           className="grid gap-10 overflow-hidden rounded-[40px] bg-secondary/95 p-8 text-white shadow-[0_45px_70px_-40px_rgba(17,51,34,0.5)] md:grid-cols-[1.1fr_0.9fr] md:p-16"
           {...motionProps(0)}

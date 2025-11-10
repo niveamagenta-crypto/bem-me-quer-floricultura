@@ -33,7 +33,7 @@ const ManifestoSection = () => {
         };
 
   return (
-    <section className="relative -mt-24 md:-mt-32">
+    <section className="relative -mt-8 md:-mt-14 lg:-mt-20">
       <div className="container mx-auto px-4 md:px-6 lg:px-12">
         <motion.div
           className="relative overflow-hidden rounded-[40px] bg-white/95 shadow-[0_40px_60px_-30px_rgba(184,160,203,0.35)] backdrop-blur"

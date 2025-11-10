@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 const VIDEO_SOURCES = [
   {
     src: 'https://cdn.coverr.co/videos/coverr-a-florists-work-table-8230/1080p.mp4',
@@ -7,9 +9,9 @@ const VIDEO_SOURCES = [
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=1920&q=80&auto=format&fit=crop';
 
-const HeroVideoBackground = ({ prefersReducedMotion, overlayGradient }) => {
+const HeroVideoBackground = ({ prefersReducedMotion, overlayGradient, parallaxStyle }) => {
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
+    <motion.div className="absolute inset-0 z-0 overflow-hidden" style={parallaxStyle}>
       {prefersReducedMotion ? (
         <img
           src={FALLBACK_IMAGE}
@@ -34,11 +36,11 @@ const HeroVideoBackground = ({ prefersReducedMotion, overlayGradient }) => {
       )}
 
       <div
-        className="absolute inset-0 mix-blend-multiply transition-colors duration-700"
-        style={{ backgroundImage: overlayGradient }}
+        className="absolute inset-0 pointer-events-none transition-opacity duration-700"
+        style={{ backgroundImage: overlayGradient, mixBlendMode: 'multiply', opacity: 0.6 }}
       />
-      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/35 to-black/20" />
-    </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-black/55 via-black/35 to-black/15" />
+    </motion.div>
   );
 };
 

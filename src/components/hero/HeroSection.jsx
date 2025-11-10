@@ -21,6 +21,11 @@ const HeroSection = () => {
 
   const animatedGradientOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.3]);
   const animatedTranslate = useTransform(scrollYProgress, [0, 1], ['0%', '-20%']);
+  const backgroundParallax = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const backgroundParallaxStyle = prefersReducedMotion
+    ? undefined
+    : { y: backgroundParallax, scale: backgroundScale };
 
   const motionConfig = (delay = 0) =>
     prefersReducedMotion
@@ -40,6 +45,7 @@ const HeroSection = () => {
       <HeroVideoBackground
         prefersReducedMotion={prefersReducedMotion}
         overlayGradient={timeOfDayTheme.gradient}
+        parallaxStyle={backgroundParallaxStyle}
       />
 
       <motion.div
